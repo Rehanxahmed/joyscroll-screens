@@ -6,6 +6,7 @@
 <meta name="robots" content="noindex">
 </head>
 <body>
+<script>window.GALLERY_FIREBASE = {"projectId": "bible-app-731cf", "databaseURL": "https://bible-app-731cf-default-rtdb.asia-southeast1.firebasedatabase.app"};</script>
 <title>Joy Scroll Screens</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Hind:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,600&display=swap">
 <style>
@@ -351,10 +352,10 @@
 <script>
 // Screens come from shots/manifest.json: real screenshots of the app.
 // Comments live in one of three places, whichever this copy of the page has:
-// on the public site, Firebase (window.GALLERY_FIREBASE, added by
-// build_live.py); published on claude.ai, the page's shared database; run
-// locally through server.py, comments.json. The first two update live for
-// everyone.
+// on the public site, a Firebase Realtime Database (window.GALLERY_FIREBASE,
+// added by build_live.py); published on claude.ai, the page's shared
+// database; run locally through server.py, comments.json. The first two
+// update live for everyone.
 const $ = (id) => document.getElementById(id);
 const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (ch) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[ch]);
 const clamp01 = (n) => Math.min(1, Math.max(0, Number(n) || 0));
@@ -420,15 +421,16 @@ async function connectFirebase(config) {
   backend.needsName = true;
   updateHint();
   try {
-    const [{ initializeApp }, fs] = await Promise.all([
+    const [{ initializeApp }, rt] = await Promise.all([
       import(`${FIREBASE_SDK}firebase-app.js`),
-      import(`${FIREBASE_SDK}firebase-firestore.js`),
+      import(`${FIREBASE_SDK}firebase-database.js`),
     ]);
-    const db = fs.getFirestore(initializeApp(config));
-    backend.fb = { fs, db };
+    const db = rt.getDatabase(initializeApp(config));
+    backend.fb = { rt, db };
     const stopped = (error) => { console.error(error); toast("Comments stopped updating. Reload the page to reconnect."); };
-    fs.onSnapshot(fs.collection(db, "threads"), (snap) => { live.threads = snap.docs.map((d) => ({ id: d.id, ...d.data() })); rebuild(); }, stopped);
-    fs.onSnapshot(fs.collection(db, "replies"), (snap) => { live.replies = snap.docs.map((d) => ({ id: d.id, ...d.data() })); rebuild(); }, stopped);
+    const rows = (snap) => Object.entries(snap.val() || {}).map(([id, v]) => ({ ...(v && typeof v === "object" ? v : {}), id }));
+    rt.onValue(rt.ref(db, "threads"), (snap) => { live.threads = rows(snap); rebuild(); }, stopped);
+    rt.onValue(rt.ref(db, "replies"), (snap) => { live.replies = rows(snap); rebuild(); }, stopped);
   } catch (error) {
     console.error(error);
     readOnly("Comments couldn’t load. Check your connection and reload.");
@@ -505,13 +507,12 @@ async function api(path, body) {
 const nowISO = () => new Date().toISOString();
 async function createComment(d) {
   if (backend.fb) {
-    const { fs, db } = backend.fb;
-    const ref = fs.doc(fs.collection(db, "threads"));
-    justAdded = ref.id;
-    return fs.setDoc(ref, {
+    const { rt, db } = backend.fb;
+    const ref = rt.push(rt.ref(db, "threads"));
+    justAdded = ref.key;
+    return rt.set(ref, {
       route: d.route, title: d.title || "", group: d.group || "", x: d.x, y: d.y, text: d.text,
-      name: myName, createdAt: nowISO(), resolvedAt: null, resolvedBy: null,
-      shotCapturedAt: d.shotCapturedAt || null,
+      name: myName, createdAt: nowISO(), shotCapturedAt: d.shotCapturedAt || null,
     });
   }
   if (!backend.live) {
@@ -530,16 +531,16 @@ async function createComment(d) {
 }
 async function replyTo(id, text) {
   if (backend.fb) {
-    const { fs, db } = backend.fb;
-    return fs.addDoc(fs.collection(db, "replies"), { thread: id, text, name: myName, createdAt: nowISO() });
+    const { rt, db } = backend.fb;
+    return rt.set(rt.push(rt.ref(db, "replies")), { thread: id, text, name: myName, createdAt: nowISO() });
   }
   if (!backend.live) { await api(`/api/comments/${encodeURIComponent(id)}/replies`, { text }); return loadLocal(); }
   await backend.db.collection("replies").doc().set({ thread: id, text, author: backend.me, createdAt: nowISO() });
 }
 async function setResolved(id, resolved) {
   if (backend.fb) {
-    const { fs, db } = backend.fb;
-    return fs.updateDoc(fs.doc(db, "threads", id), { resolvedAt: resolved ? nowISO() : null, resolvedBy: resolved ? myName || null : null });
+    const { rt, db } = backend.fb;
+    return rt.update(rt.ref(db, `threads/${id}`), { resolvedAt: resolved ? nowISO() : null, resolvedBy: resolved ? myName || null : null });
   }
   if (!backend.live) { await api(`/api/comments/${encodeURIComponent(id)}/resolve`, { resolved }); return loadLocal(); }
   await backend.db.doc(`threads/${id}`).update({ resolvedAt: resolved ? nowISO() : null, resolvedBy: resolved ? backend.me : null });
