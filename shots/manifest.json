@@ -1,0 +1,216 @@
+{
+  "capturedAt": "2026-09-28T13:04:06",
+  "device": "iPhone 17",
+  "groups": [
+    {
+      "name": "Joy",
+      "shots": [
+        {
+          "route": "joy",
+          "title": "Feed",
+          "file": "shots/joy.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "joy.forme",
+          "title": "For Me",
+          "file": "shots/joy.forme.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "joy.study",
+          "title": "Study",
+          "file": "shots/joy.study.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "joy.comments",
+          "title": "Comments",
+          "file": "shots/joy.comments.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "joy.rhythm",
+          "title": "Prayer rhythm",
+          "file": "shots/joy.rhythm.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        }
+      ]
+    },
+    {
+      "name": "Learn",
+      "shots": [
+        {
+          "route": "learn",
+          "title": "Learn",
+          "file": "shots/learn.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "learn.explore",
+          "title": "Explore topics",
+          "file": "shots/learn.explore.webp",
+          "capturedAt": "2026-09-28T13:04:06"
+        },
+        {
+          "route": "learn.path",
+          "title": "Path",
+          "file": "shots/learn.path.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "learn.collection",
+          "title": "Collection",
+          "file": "shots/learn.collection.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "learn.lesson",
+          "title": "Lesson",
+          "file": "shots/learn.lesson.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "learn.lesson.end",
+          "title": "Lesson, last card",
+          "file": "shots/learn.lesson.end.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "learn.milestone",
+          "title": "Milestone",
+          "file": "shots/learn.milestone.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "learn.askjoy",
+          "title": "Ask Joy",
+          "file": "shots/learn.askjoy.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "learn.askjoy.answer",
+          "title": "Ask Joy, an answer",
+          "file": "shots/learn.askjoy.answer.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        }
+      ]
+    },
+    {
+      "name": "Prayer",
+      "shots": [
+        {
+          "route": "prayer",
+          "title": "Prayer",
+          "file": "shots/prayer.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "prayer.session",
+          "title": "Session",
+          "file": "shots/prayer.session.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "prayer.list",
+          "title": "Prayer list",
+          "file": "shots/prayer.list.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        }
+      ]
+    },
+    {
+      "name": "You",
+      "shots": [
+        {
+          "route": "you",
+          "title": "You",
+          "file": "shots/you.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        }
+      ]
+    },
+    {
+      "name": "Onboarding",
+      "shots": [
+        {
+          "route": "ob.splash",
+          "title": "Splash",
+          "file": "shots/ob.splash.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "ob.hook",
+          "title": "Hook",
+          "file": "shots/ob.hook.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "ob.scroll",
+          "title": "Scroll Scripture",
+          "file": "shots/ob.scroll.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "ob.forme",
+          "title": "For Me",
+          "file": "shots/ob.forme.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "ob.pray",
+          "title": "Hold to Pray",
+          "file": "shots/ob.pray.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "ob.learn",
+          "title": "Learn",
+          "file": "shots/ob.learn.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "ob.reviews",
+          "title": "Reviews",
+          "file": "shots/ob.reviews.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "ob.trial",
+          "title": "Before the paywall",
+          "file": "shots/ob.trial.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        }
+      ]
+    },
+    {
+      "name": "Paywall",
+      "shots": [
+        {
+          "route": "pw.remind",
+          "title": "Reminder",
+          "file": "shots/pw.remind.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "pw.included",
+          "title": "What\u2019s included",
+          "file": "shots/pw.included.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "pw.trial",
+          "title": "How the trial works",
+          "file": "shots/pw.trial.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        },
+        {
+          "route": "pw.plans",
+          "title": "Plans",
+          "file": "shots/pw.plans.webp",
+          "capturedAt": "2026-09-28T13:02:14"
+        }
+      ]
+    }
+  ]
+}
